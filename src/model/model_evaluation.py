@@ -113,7 +113,11 @@ def main():
             params = clf.get_params()
             for param_name, param_value in params.items():
                 mlflow.log_param(param_name, param_value)
-
+        # Log model
+        mlflow.sklearn.log_model(clf, "model")
+                
+        # Save and log the notebook
+        mlflow.log_artifact(__file__)
 
     except Exception as e:
         logger.error('Failed to complete the model evaluation process: %s', e)

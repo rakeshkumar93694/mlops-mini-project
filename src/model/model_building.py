@@ -52,10 +52,10 @@ def load_data(file_path: str) -> pd.DataFrame:
         logger.error('Unexpected error occurred while loading the data: %s', e)
         raise
 
-def train_model(X_train: np.ndarray, y_train: np.ndarray, params: dict) -> GradientBoostingClassifier:
+def train_model(X_train: np.ndarray, y_train: np.ndarray, params: dict) -> LogisticRegression:
     """Train the Logistic Regression"""
     try:
-        clf = LogisticRegression(C=1, solver='liblinear', n_jobs=-1, penlty=12)
+        clf = LogisticRegression(C=1, solver='liblinear', n_jobs=-1, penalty='l2')
         clf.fit(X_train, y_train)
         logger.debug('Model training completed')
         return clf

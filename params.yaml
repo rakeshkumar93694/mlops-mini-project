@@ -3,3 +3,8 @@ data_ingestion:
 
 feature_engineering:
   max_features: 2000
+
+model_building:
+  C: 1.0
+  solver: "liblinear"
+  penalty: "l2"

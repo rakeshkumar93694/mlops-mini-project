@@ -8,10 +8,15 @@ import mlflow
 import mlflow.sklearn
 import dagshub
 import nltk
+import os
+from dotenv import load_dotenv
+load_dotenv()
+
 
 mlflow.set_tracking_uri('https://dagshub.com/rakeshkumar93694/mlops-mini-project.mlflow')
 
 dagshub.init(repo_owner='rakeshkumar93694', repo_name='mlops-mini-project', mlflow=True)
+
 
 # logging configuration
 logger = logging.getLogger('model_evaluation')

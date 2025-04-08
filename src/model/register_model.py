@@ -69,13 +69,20 @@ import time
 from dotenv import load_dotenv
 from mlflow.exceptions import MlflowException
 
-# Load environment variables
-load_dotenv()
+# Set up DagsHub credentials for MLflow tracking
+dagshub_token = os.getenv("DAGSHUB_Kgpian")
+if not dagshub_token:
+    raise EnvironmentError("DAGSHUB_Kgpian environment variable is not set")
 
-# Set tracking URI and authentication
-mlflow.set_tracking_uri('https://dagshub.com/rakeshkumar93694/mlops-mini-project.mlflow')
-os.environ['MLFLOW_TRACKING_USERNAME'] = os.getenv('MLFLOW_TRACKING_USERNAME')
-os.environ['MLFLOW_TRACKING_PASSWORD'] = os.getenv('MLFLOW_TRACKING_PASSWORD')
+os.environ['MLFLOW_TRACKING_USERNAME'] = dagshub_token
+os.environ['MLFLOW_TRACKING_PASSWORD'] = dagshub_token
+
+dagshub_url = "https://dagshub.com"
+repo_owner = "rakeshkumar93694"
+repo_name = "mlops-mini-project.mlflow"
+
+# Set up MLflow tracking URI
+mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
 
 # Set up logging
 logging.basicConfig(level=logging.DEBUG)

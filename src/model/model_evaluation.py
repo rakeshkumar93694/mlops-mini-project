@@ -10,12 +10,22 @@ import dagshub
 import nltk
 import os
 from dotenv import load_dotenv
-load_dotenv()
+# load_dotenv()
 
+# Set up DagsHub credentials for MLflow tracking
+dagshub_token = os.getenv("DAGSHUB_Kgpian")
+if not dagshub_token:
+    raise EnvironmentError("DAGSHUB_Kgpian environment variable is not set")
 
-mlflow.set_tracking_uri('https://dagshub.com/rakeshkumar93694/mlops-mini-project.mlflow')
+os.environ['MLFLOW_TRACKING_USERNAME'] = dagshub_token
+os.environ['MLFLOW_TRACKING_PASSWORD'] = dagshub_token
 
-dagshub.init(repo_owner='rakeshkumar93694', repo_name='mlops-mini-project', mlflow=True)
+dagshub_url = "https://dagshub.com"
+repo_owner = "rakeshkumar93694"
+repo_name = "mlops-mini-project.mlflow"
+
+# Set up MLflow tracking URI
+mlflow.set_tracking_uri(f'{dagshub_url}/{repo_owner}/{repo_name}.mlflow')
 
 
 # logging configuration

@@ -22,7 +22,7 @@ jobs:
 
       - name: run pipeline
         env:
-          DAGSHUB_Kgpian: ${{ secrets.DAGSHUB_Kgpian }}
+          DAGSHUB_KGPIAN: ${{ secrets.DAGSHUB_KGPIAN }}
         run: |
           dvc repro
   

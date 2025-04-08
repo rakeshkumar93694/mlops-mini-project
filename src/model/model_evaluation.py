@@ -13,7 +13,7 @@ from dotenv import load_dotenv
 # load_dotenv()
 
 # Set up DagsHub credentials for MLflow tracking
-dagshub_token = os.getenv("DAGSHUB_Kgpian")
+dagshub_token = os.getenv("DAGSHUB_KGPIAN")
 if not dagshub_token:
     raise EnvironmentError("DAGSHUB_Kgpian environment variable is not set")
 

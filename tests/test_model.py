@@ -46,7 +46,7 @@ class TestModelLoading(unittest.TestCase):
         return latest_version[0].version if latest_version else None
     
     def test_model_loaded_properly(self):
-        self.assertIsNotNone(self.model)
+        self.assertIsNotNone(self.__class__.new_model)
 
     def test_model_performance(self):
         # Extract features and labels from holdout test data
@@ -72,7 +72,7 @@ class TestModelLoading(unittest.TestCase):
         self.assertGreaterEqual(accuracy_new, expected_accuracy, f'Accuracy should be at least {expected_accuracy}') 
         self.assertGreaterEqual(precision_new, expected_precision, f'Prediction should be at least {expected_precision}')
         self.assertGreaterEqual(recall_new, expected_recall, f'Recall should be at least {expected_recall}')
-        self.assertGreaterEqual(expected_f1, f'F1 score should be at least {expected_f1}')
+        self.assertGreaterEqual(f1_new, expected_f1, f'F1 score should be at least {expected_f1}')
 
 if __name__ == "__main__":
     unittest.main()

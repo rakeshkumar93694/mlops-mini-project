@@ -44,3 +44,9 @@ jobs:
         env:
           DAGSHUB_KGPIAN: ${{ secrets.DAGSHUB_KGPIAN }}
         run: python scripts/promote_model.py
+      
+      - name: Run Flask app tests
+      if: success()
+      env:
+        DAGSHUB_KGPIAN: ${{ secrets.DAGSHUB_KGPIAN }}
+      run: python -m unittest test/test_flask_app.py

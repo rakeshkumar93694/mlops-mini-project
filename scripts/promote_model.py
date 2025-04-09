@@ -23,7 +23,7 @@ def promote_model():
 
         model_name = "Rakesh_kgpian"
         # Get the latest version
-        latest_version_staging = client.get_latest_versions(model_name, stages=["Stages"])[0].version
+        latest_version_staging = client.get_latest_versions(model_name, stages=["Staging"])[0].version
 
         # Archieve the current production model
         prod_versions = client.get_latest_versions(model_name, stages=["Production"])

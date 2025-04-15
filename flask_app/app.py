@@ -3,10 +3,23 @@ from flask import Flask, render_template, request, jsonify
 import mlflow.pyfunc
 import os
 from mlflow.tracking import MlflowClient
-from flask_app.preprocessing_utility import normalize_text
+# from flask_app.preprocessing_utility import normalize_text
 import pickle
 import pandas as pd
+import string
+from string import ascii_lowercase
 
+
+
+
+def normalize_text(text):
+    text = lower_case(text)
+    text = removing_numbers(text)
+    text = removing_punctuations(text)
+    text = removing_urls(text)
+    text = lemmatization(text)
+
+    return text
 
 # Set up DagsHub credentials for MLflow tracking
 
@@ -75,5 +88,5 @@ def predict():
     return render_template('index.html', result=result[0])
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
 

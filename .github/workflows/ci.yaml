@@ -1,16 +1,17 @@
 name: CI Pipeline
 
-on: push
+on: 
+  push:
 
 jobs:
   project-testing:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout code
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: setup python
+      - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.11'
@@ -23,11 +24,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: install dependencies
+      - name: Install dependencies
         run: |
           pip install -r requirements.txt
 
-      - name: run pipeline
+      - name: Run pipeline
         env:
           DAGSHUB_KGPIAN: ${{ secrets.DAGSHUB_KGPIAN }}
         run: |
@@ -43,13 +44,15 @@ jobs:
         if: success()
         env:
           DAGSHUB_KGPIAN: ${{ secrets.DAGSHUB_KGPIAN }}
-        run: python scripts/promote_model.py
-      
+        run: |
+          python scripts/promote_model.py
+
       - name: Run Flask app tests
         if: success()
         env:
           DAGSHUB_KGPIAN: ${{ secrets.DAGSHUB_KGPIAN }}
-        run: python -m unittest tests/test_flask_app.py
+        run: |
+          python -m unittest tests/test_flask_app.py
 
       - name: Log in to Docker Hub
         if: success()
@@ -64,6 +67,6 @@ jobs:
           docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/emotion2:latest .
 
       - name: Push Docker image to Docker Hub
-       if: success()
-       run: |
-        docker push ${{ secrests.DOCKER_HUB_USERNAME }}/emotion2:latest
+        if: success()
+        run: |
+          docker push ${{ secrets.DOCKER_HUB_USERNAME }}/emotion2:latest

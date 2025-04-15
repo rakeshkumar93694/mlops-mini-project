@@ -23,7 +23,7 @@ def normalize_text(text):
 
 # Set up DagsHub credentials for MLflow tracking
 
-dagshub_token = os.getenv("DAGSHUB_KGPIAN")
+dagshub_token = os.getenv("DAGSHUB_Kgpian")
 if not dagshub_token:
     raise EnvironmentError("DAGSHUB_Kgpian environment variable is not set")
 
